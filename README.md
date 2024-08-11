@@ -9,3 +9,13 @@ This is able to download and install the libraries required into a conda enviorm
 ## Who is this for?
 
 These libraries should be used for building S2l your self. A precompiled version is available in this [repo](https://github.com/aftabnadim/S2L)
+
+## How can I build it for myself
+
+Clone this github repo
+
+```
+git clone https://github.com/python312/s2l-loader
+```
+
+Create a folder named **AutomationFolder** in the directory of the loader and name the script that you want to execute **main.py**
