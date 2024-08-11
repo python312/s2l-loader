@@ -19,3 +19,4 @@ git clone https://github.com/python312/s2l-loader
 ```
 
 Create a folder named **AutomationFolder** in the directory of the loader and name the script that you want to execute **main.py**
+if you require any third party libraries just create a **requirements.txt** like usual.
