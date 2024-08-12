@@ -1,5 +1,5 @@
 
-# S2l-Loader
+# S2L-Loader
 
 Auto Installer for the S2l codebase
 
@@ -8,7 +8,7 @@ This is able to download and install the libraries required into a conda enviorm
 
 ## Who is this for?
 
-These libraries should be used for building S2l your self. A precompiled version is available in this [repo](https://github.com/aftabnadim/S2L)
+This is for people that are suspicious about the precompiled exe file in this [repo](https://github.com/aftabnadim/S2L). I also made this for people who are too lazy to install S2L themselves. This won't support Linux and Mac and it will never will.
 
 ## How can I build it for myself
 
