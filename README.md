@@ -1,7 +1,7 @@
 
 # S2L-Loader
 
-Auto Installer for the S2l codebase
+Auto Installer for the S2L codebase
 
 ## What it does
 This is able to download and install the libraries required into a conda enviorment to prevent any library incompatability.
