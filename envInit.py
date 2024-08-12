@@ -2,10 +2,17 @@ import os
 import subprocess
 import urllib.request
 import platform
+import sys
+
+system = platform.system().lower()
 
 def get_conda_path():
-    user_name = os.getlogin()
-    return f"C:\\Users\\{user_name}\\Miniconda3\\Scripts\\conda.exe"
+    
+    if system == "windows":
+        user_name = os.getlogin()
+        return f"C:\\Users\\{user_name}\\Miniconda3\\Scripts\\conda.exe"
+    else:
+        return os.path.expanduser("~/miniconda/bin/conda")
 
 def is_conda_installed():
     conda_executable = get_conda_path()
@@ -26,21 +33,28 @@ def install_conda_with_winget():
 
 def download_and_install_conda():
     system = platform.system().lower()
+    
     if system == "windows":
         install_conda_with_winget()
-    else:
+    elif system == "darwin":  # macOS
+        conda_installer_url = "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh"
+    elif system == "linux":
         conda_installer_url = "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-        installer_path = "/tmp/miniconda_installer.sh"
-        install_command = ["bash", installer_path, "-b", "-p", os.path.expanduser("~/miniconda")]
-        conda_bin_path = os.path.expanduser("~/miniconda/bin")
-        
-        print("Downloading Miniconda installer...")
-        urllib.request.urlretrieve(conda_installer_url, installer_path)
-        
-        print("Installing Miniconda...")
-        subprocess.run(install_command, check=True)
-        
-        os.environ["PATH"] = conda_bin_path + os.pathsep + os.environ["PATH"]
+    else:
+        print(f"Unsupported platform: {system}")
+        sys.exit(1)
+
+    installer_path = "/tmp/miniconda_installer.sh"
+    install_command = ["bash", installer_path, "-b", "-p", os.path.expanduser("~/miniconda")]
+    conda_bin_path = os.path.expanduser("~/miniconda/bin")
+    
+    print("Downloading Miniconda installer...")
+    urllib.request.urlretrieve(conda_installer_url, installer_path)
+    
+    print("Installing Miniconda...")
+    subprocess.run(install_command, check=True)
+    
+    os.environ["PATH"] = conda_bin_path + os.pathsep + os.environ["PATH"]
 
 def environment_exists(env_name):
     conda_executable = get_conda_path()
@@ -90,9 +104,16 @@ requirements_file = "AutomationFolder/requirements.txt"  # Path to your requirem
 if not environment_exists(env_name):
     create_conda_env(env_name, python_version, requirements_file)
     # Prompt user to choose CUDA or CPU version of Torch when creating the environment
-    use_cuda = input("Do you want to install the CUDA version of Torch? (yes/no): ").strip().lower() == "yes"
-    install_latest_torch(env_name, use_cuda)
-    install_cellpose(env_name)
+    
+    if system == "darwin":
+    
+        use_cuda = False
+        install_latest_torch(env_name, use_cuda)
+        install_cellpose(env_name)
+    else
+        use_cuda = input("Do you want to install the CUDA version of Torch? (yes/no): ").strip().lower() == "yes"
+        install_latest_torch(env_name, use_cuda)
+        install_cellpose(env_name)
 else:
     # Do nothing if the environment already exists
     print(f"The Conda environment '{env_name}' already exists. No further action is taken.")
