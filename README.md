@@ -1,14 +1,13 @@
 
 # S2L-Loader
-
-Auto Installer for the S2L codebase
+A quick and dirty enviorment setup tool for automating the S2L GUI codebase
 
 ## What it does
 This is able to download and install the libraries required into a conda enviorment to prevent any library incompatability.
 
 ## Who is this for?
 
-This is for people that are suspicious about the precompiled exe file in this [repo](https://github.com/aftabnadim/S2L). I also made this for people who are too lazy to install S2L themselves. This won't support Linux and Mac and it will never will.
+This is for people that are suspicious about the precompiled exe file in this [repo](https://github.com/aftabnadim/S2L). I also made this for people who are too lazy to install S2L themselves. This won't support Linux and Mac and it will never will. 
 
 ## How can I build it for myself
 
